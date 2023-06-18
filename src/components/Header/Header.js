@@ -1,6 +1,7 @@
 import NavBar from "../NavBar";
 import React from "react";
 import Showcart from "../Cart/Showcart";
+import {Outlet} from 'react-router-dom'
 const Header = () => {
   return (
     <>
@@ -20,7 +21,7 @@ const Header = () => {
           <h1>The Generic</h1>
         </div>
       </div>
-    
+    <Outlet/>
     </>
   );
 };

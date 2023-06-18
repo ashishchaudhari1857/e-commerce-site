@@ -1,4 +1,5 @@
-  
+
+  import { NavLink } from "react-router-dom";
 const NavBar = () => {
 
 
@@ -7,29 +8,29 @@ const NavBar = () => {
     <>
         <ul className="nav   justify-content-center navbar navbar-expand-sm">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">
+            <NavLink className="nav-link active" aria-current="page" to="/home">
               HOME
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <NavLink className="nav-link" to="/store">
               STORE
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
+            <NavLink className="nav-link"  to="/about">
               ABOUT
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a
+            <NavLink
               className="nav-link disabled"
               href="#"
               tabIndex="-1"
               aria-disabled="true"
             >
               Disabled
-            </a>
+            </NavLink>
           </li>
           {/* <li classNameName="nav-item">
             <button classNameName="btn btn-primary">Cart</button>

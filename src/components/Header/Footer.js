@@ -1,6 +1,9 @@
+import {Outlet} from "react-router-dom"
 const Footer = () => {
+
   return (
-    <div className="container-fluid">
+    <>
+    <div className="container-fluid  ">
       <div className="row  bg-primary">
              <div className=" col-3   col-sm-4 bg-success  text-white  p-1 mx-auto">
              <h2 className="mx-5  justify-content-center d-flex"  > TheGeneric </h2>
@@ -12,7 +15,11 @@ const Footer = () => {
           </div>
       </div>
     </div>
+    <Outlet/>
+    </>
   );
 };
 
 export default Footer;
+
+
