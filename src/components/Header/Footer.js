@@ -2,10 +2,10 @@ const Footer = () => {
   return (
     <div className="container-fluid">
       <div className="row  bg-primary">
-             <div className=" col-6 col-sm-6 bg-success  text-white  p-2 mx-auto">
-             <h1> TheGeneric </h1>
+             <div className=" col-3   col-sm-4 bg-success  text-white  p-1 mx-auto">
+             <h2 className="mx-5  justify-content-center d-flex"  > TheGeneric </h2>
              </div>
-           <div className=" col-6 col-sm-6 d-flex  justify-content-between align-items-center ">
+           <div className=" col-9 col-sm-8 d-flex  justify-content-around align-items-center ">
                <i className="bi bi-youtube   fs-3 fs-sm-2" style={{ fontSize: '2rem' }}>YouTube</i>
                <i className="bi bi-facebook fs-3 fs-sm-2"   style={{ fontSize: '2rem' }}>facebook</i>
                <i className="bi bi-twitter  fs-3 fs-sm-2" style={{ fontSize: '2rem' }}>twitter</i>

@@ -20,8 +20,8 @@ const ctx=useContext(Context)
         <div className="row">
           <div className="col text-center mt-3 mb-3 fs-5">{props.item.price} $</div>
           <div className="col">
-            <button className=" cart btn  btn-primary   btm-sm p-1 mt-3 mb-3" onClick={add.bind(null,props.item)}>
-              <i className="bi bi-cart"></i>
+            <button className=" cart btn  btn-primary   btm-sm  p-sm-0 p-md-1 mt-3 mb-3" onClick={add.bind(null,props.item)}>
+              <i className="bi bi-cart "></i>
               <b> Add to Cart </b>
             </button>
           </div>

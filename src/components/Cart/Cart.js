@@ -18,9 +18,9 @@ const Cart = (props) => {
      
       <Modal onclose={props.onclose}>
         <div className="row my-2 p-1 d-flex border border-primary text-white ">
-          <div className="col-5 bg-secondary fs-3" >ITEM</div>
-          <div className="col-2 bg-secondary fs-3" >PRICE</div>
-          <div className="col-5 bg-secondary fs-3">QUANTITY</div>
+          <div className="col-5 bg-secondary fs" >ITEM</div>
+          <div className="col-2 bg-secondary fs" >PRICE</div>
+          <div className="col-5 bg-secondary fs">QUANTITY</div>
         </div>
         {cartlist}
         </Modal>

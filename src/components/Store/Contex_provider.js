@@ -12,11 +12,14 @@ const stateReducer = (state = defaultState, action) => {
     case "add":
       const index = state.items.findIndex((item) => item.id === action.item.id);
       if (index !== -1) {
+        alert("tem is already available in your list")
         return {
           ...state,
           error: "Item is already available in your list",
         };
       } else {
+
+        
         return {
           ...state,
           items: [...state.items, action.item],

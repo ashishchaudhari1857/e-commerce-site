@@ -2,6 +2,7 @@ const Modal = (props) => {
     console.log(props.children)
   return (
     <>
+
       <div className="modal d-block text-center" tabIndex="-1" >
         <div className="modal-dialog ">
           <div className="modal-content ">
@@ -24,18 +25,20 @@ const Modal = (props) => {
               <button
                  onClick={props.onclose}
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary fs-0 p-1 p-sm-0 p-md-1 "
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button"  className="btn btn-primary">
+              <button type="button" className="btn btn-primary fs-0 p-1 p-sm-0 p-md-1">
+
                 Save changes
               </button>
             </div>
           </div>
         </div>
       </div>
+     
     </>
   );
 };
