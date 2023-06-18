@@ -1,4 +1,8 @@
+  c
 const NavBar = () => {
+
+
+
   return (
     <>
         <ul className="nav   justify-content-center navbar navbar-expand-sm">
