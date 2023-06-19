@@ -3,7 +3,7 @@ const Footer = () => {
 
   return (
     <>
-    <div className="container-fluid  ">
+    <div className="container-fluid  "  style={{ position: "relative", bottom: 0, width: "100%" }}>
       <div className="row  bg-primary">
              <div className=" col-3   col-sm-4 bg-success  text-white  p-1 mx-auto">
              <h2 className="mx-5  justify-content-center d-flex"  > TheGeneric </h2>

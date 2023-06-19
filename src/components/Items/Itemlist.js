@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import Context from "../Store/Context";
 const Itemlist = (props) => {
 const ctx=useContext(Context)
@@ -10,13 +11,16 @@ const ctx=useContext(Context)
     <>
        
       <div className="col-12 col-sm-12 col-md-6  " key={props.item.id}>
-        <h5 className="text-center"> {props.item.title} </h5>
+        {/* <h5 className="text-center"> {props.item.title} </h5> */}
+        
         <img
-          src={props.item.imageUrl}
+          src={props.item.image}
           className="img-fluid mx-auto d-block "
           alt={props.item.title}
-          style={{width:"250px"}}
+          style={{width:"250px" , height:"280px"}}
         />
+          <h5 className="text-center"> <Link to={`/store/${props.item.id}`} >{props.item.title}</Link></h5>
+        
         <div className="row">
           <div className="col text-center mt-3 mb-3 fs-5">{props.item.price} $</div>
           <div className="col">

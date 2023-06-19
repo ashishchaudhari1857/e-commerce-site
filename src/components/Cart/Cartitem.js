@@ -9,7 +9,7 @@ const ctx = useContext(Context);
   return (
     <div className="row my-3"> 
       <div className="col-2 ">
-        <img src={props.item.imageUrl} className="rounded" style={{width:"85px"}}/>
+        <img src={props.item.image} className="rounded" style={{width:"85px"}}/>
       </div>
       <div className="col-4 text-center "  style={{fontWeight:"bold", fontSize:"1rem"}}  >{props.item.title}</div>
       <div className="col-1 " style={{fontWeight:"bold" }}>  {props.item.price}</div>

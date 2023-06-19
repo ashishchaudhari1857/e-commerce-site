@@ -1,48 +1,36 @@
 import { useState } from "react";
 import Itemlist from "./Itemlist";
-
+import { useGlobalHook } from "../Store/Contex_provider";
 const Items = () => {
-   
-  const productsArr = [
-    {
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-        id:1
-    },
-    {
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-        id:2
-    },
-     {
-      title: "Yellow and Black Colors",
-      price: 70,
-     imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-        id:3
-    },
+    const ctx=useGlobalHook();
 
-    {
-      title: "Blue Color",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-        id:4
-    },
-  ];
-   const [items, setitems]=useState(productsArr);
-  const itemlist =items.map((item ,i)=>{
-    return<Itemlist item={item } key ={i} ></Itemlist>
+  
+ console.log(ctx.data)
+ console.log(ctx.error)
+ 
+ 
+  const loading =ctx.loading;
+  const error=ctx.error;
+  //  const [items, setitems]=useState(productsArr);
+  const itemlist =ctx.data.map((item ,i)=>{
+    return(<>
+    <Itemlist item={item } key ={item.id} ></Itemlist>
+    </>
+    )
   })
+  console.log(itemlist)
   return <>
   
   <div className="container " >
+ 
     <div className="row" >
-    {itemlist}
+
+      {!loading &&  itemlist.length >0 && itemlist} 
+      {!loading && itemlist.length===0 &&<p>No Data found</p>}
+      {!loading &&  itemlist.length >0 && itemlist} 
+      {error    && <p>something is wromg </p>}
+      {loading &&  !error &&<p>Loading.......</p> } 
+   
     </div>
     </div>
   </>; 

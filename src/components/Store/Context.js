@@ -5,6 +5,7 @@ const Context =React.createContext(
         totalitem:0,
         addItem: (item) => {},
         removeItem: (id) => {},
+        data:[]
     }
 )
 export default Context;

@@ -1,47 +1,18 @@
-import { useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import Context from "./Context";
-
+import Reducer from "./Reducer";
 const defaultState = {
   items: [],
   totalItem: 0,
   error: null,
+  data:[],
+  loading:true,
+  error:null
 };
 
-const stateReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case "add":
-      const index = state.items.findIndex((item) => item.id === action.item.id);
-      if (index !== -1) {
-        alert("tem is already available in your list")
-        return {
-          ...state,
-          error: "Item is already available in your list",
-        };
-      } else {
-
-        
-        return {
-          ...state,
-          items: [...state.items, action.item],
-          totalItem: state.totalItem + 1,
-          error: null,
-        };
-      }
-    case "remove":
-      const updatedItems = state.items.filter((item) => item.id !== action.id);
-      return {
-        ...state,
-        items: updatedItems,
-        totalItem: state.totalItem - 1,
-        error: null,
-      };
-    default:
-      return state;
-  }
-};
 
 const ContextProvider = (props) => {
-  const [itemState, dispatchState] = useReducer(stateReducer, defaultState);
+  const [itemState, dispatchState] = useReducer(Reducer, defaultState);
 
   const addItem = (item) => {
     dispatchState({ type: "add", item: item });
@@ -51,19 +22,57 @@ const ContextProvider = (props) => {
     dispatchState({ type: "remove", id: id });
   };
 
+  
+    
+  
+
+//   here are we making http request  api call 
+  const API ="https://fakestoreapi.com/products";
+
+
+  useEffect(()=>{
+  const fetchdata = async()=>{
+
+  try{
+    dispatchState({type:"loading"})
+    const response= await fetch(API);
+    
+    const data=await response.json()
+    if(!response.ok){
+      throw Error("something is wrong")
+     }
+    dispatchState({type:"additem", data:data });
+  }catch(err){
+   dispatchState({type:"error" ,error:err})
+  }
+}
+fetchdata();
+} ,[])
+
+
   const contextValue = {
     items: itemState.items,
     totalItem: itemState.totalItem,
     addItem: addItem,
     removeItem: removeItem,
     error: itemState.error,
-  };
-
+    data:itemState.data,
+    loading:itemState.loading,
+    error:itemState.error
+  }
   return (
     <Context.Provider value={contextValue}>
       {props.children}
+      
     </Context.Provider>
   );
 };
 
 export default ContextProvider;
+// custom hook 
+const useGlobalHook=()=>{
+
+  return useContext (Context)
+}
+
+export {useGlobalHook}
