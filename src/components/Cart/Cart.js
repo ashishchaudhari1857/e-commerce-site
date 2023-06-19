@@ -1,11 +1,14 @@
 
 import Modal from "../Modal/Modal";
 import CartItem from "./Cartitem";
-import Context from "../Store/Context";
-import { useContext } from "react";
+// import Context from "../Store/Context";
+// import { useContext } from "react";
+import { useGlobalHook } from "../Store/Contex_provider";
 const Cart = (props) => {
-   const ctx=useContext(Context);
-     console.log(ctx.items)
+  //  const ctx=useContext(Context);
+  const ctx=useGlobalHook();
+ const  {items} =useGlobalHook()
+     console.log(items)    // ctx is object and items is  giving direct array with  custum hook
   
 
 
