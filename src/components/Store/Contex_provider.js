@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer } from "react";
+import { useCallback, useContext, useEffect, useReducer } from "react";
 import Context from "./Context";
 import Reducer from "./Reducer";
 const defaultState = {
@@ -7,7 +7,7 @@ const defaultState = {
   error: null,
   data:[],
   loading:true,
-  error:null
+ 
 };
 
 
@@ -22,40 +22,46 @@ const ContextProvider = (props) => {
     dispatchState({ type: "remove", id: id });
   };
 
-  
+ 
     
   
 
 //   here are we making http request  api call 
-  const API ="https://fakestoreapi.com/products";
+  const API ="https://api.escuelajs.co/api/v1/products"
 
 
-  useEffect(()=>{
-  const fetchdata = async()=>{
 
-  try{
-    dispatchState({type:"loading"})
-    const response= await fetch(API);
-    
-    const data=await response.json()
-    if(!response.ok){
-      throw Error("something is wrong")
-     }
-    dispatchState({type:"additem", data:data });
-  }catch(err){
-   dispatchState({type:"error" ,error:err})
-  }
-}
-fetchdata();
-} ,[])
+  const fetchdata = useCallback(async () => {
+    try {
+      dispatchState({ type: "loading" });
+      const response = await fetch(API);
+      const data = await response.json();
+      if (!response.ok) {
+        throw Error("Something went wrong");
+      }
+      dispatchState({ type: "additem", data: data });
+    } catch (err) {
+      dispatchState({ type: "error", error: err });
+    }
+  }, []);
+  //  ew cant  use one callback function inside another
 
+  useEffect(() => {
+    fetchdata();
+  }, [fetchdata]);
+
+
+
+  //  const retry = setInterval(()=>{
+  //   fetchdata()
+  //  },2000)
 
   const contextValue = {
     items: itemState.items,
     totalItem: itemState.totalItem,
     addItem: addItem,
     removeItem: removeItem,
-    error: itemState.error,
+  
     data:itemState.data,
     loading:itemState.loading,
     error:itemState.error
@@ -63,7 +69,6 @@ fetchdata();
   return (
     <Context.Provider value={contextValue}>
       {props.children}
-      
     </Context.Provider>
   );
 };

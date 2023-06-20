@@ -8,6 +8,7 @@ import About from "./components/About/About";
 import Error from "./components/Home/Error";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AddProduct } from "./components/Addproduct/Addproduct";
 function App() {
   return (
     <Contex_provider>
@@ -22,7 +23,9 @@ function App() {
           <Route path="*" element={<Error/>} />
         </Route>
       </Routes>
+      <AddProduct></AddProduct>
       <Footer />
+      
     </Contex_provider>
   );
 }

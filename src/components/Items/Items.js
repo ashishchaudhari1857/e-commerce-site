@@ -12,14 +12,14 @@ const Items = () => {
   const loading =ctx.loading;
   const error=ctx.error;
   //  const [items, setitems]=useState(productsArr);
-  const itemlist =ctx.data.map((item ,i)=>{
+  const itemlist =ctx.data.map((item )=>{
     return(<>
-    <Itemlist item={item } key ={item.id} ></Itemlist>
+    <Itemlist item={item} key={item.id} ></Itemlist>
     </>
     )
   })
   console.log(itemlist)
-  return <>
+  return(
   
   <div className="container " >
  
@@ -27,13 +27,12 @@ const Items = () => {
 
       {!loading &&  itemlist.length >0 && itemlist} 
       {!loading && itemlist.length===0 &&<p>No Data found</p>}
-      {!loading &&  itemlist.length >0 && itemlist} 
       {error    && <p>something is wromg </p>}
       {loading &&  !error &&<p>Loading.......</p> } 
    
     </div>
     </div>
-  </>; 
+  );
 };
 
 export default Items;
