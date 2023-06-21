@@ -6,6 +6,7 @@ const ctx = useContext(Context);
     const remove = useCallback(() => {
     ctx.removeItem(props.item.key);
   }, [ctx  ,props.item.key]);
+
   return (
     <div className="row my-3"> 
       <div className="col-2 ">
@@ -15,7 +16,7 @@ const ctx = useContext(Context);
       <div className="col-1 " style={{fontWeight:"bold" }}>  {props.item.price}</div>
       <div className="col-2  " style={{fontWeight:"bold"}}>  {props.item.quantity}</div>
       <div className="col-3  " style={{fontWeight:"bold"}}>  
-      <button className="btn btn-danger p-1 d-flex" onClick={remove}>Remove</button>
+      <button className="btn btn-danger p-1 d-flex" onClick={remove}    >Remove</button>
       </div>
     </div>
   );

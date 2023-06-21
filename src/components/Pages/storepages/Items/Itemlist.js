@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import Context from "../../Store/Context";
+import Context from "../../../Store/Context";
 const Itemlist = (props) => {
 const ctx=useContext(Context)
 
  const add =(item)=>{
  ctx.addItem(item)
  }
+ const btn=ctx.btn;
   return (
     <>
        
@@ -24,7 +25,7 @@ const ctx=useContext(Context)
         <div className="row">
           <div className="col text-center mt-3 mb-3 fs-5">{props.item.price} $</div>
           <div className="col">
-            <button className=" cart btn  btn-primary   btm-sm  p-sm-0 p-md-1 mt-3 mb-3" onClick={add.bind(null,props.item)}>
+            <button className=" cart btn  btn-primary   btm-sm  p-sm-0 p-md-1 mt-3 mb-3" disabled={btn} onClick={add.bind(null,props.item)}>
               <i className="bi bi-cart "></i>
               <b> Add to Cart </b>
             </button>

@@ -7,29 +7,32 @@ const defaultState = {
   error: null,
   data: [],
   loading: true,
+  btn: true,
 };
 
-   const ContextProvider = (props) => {
-    const API = "https://first-94ac3-default-rtdb.firebaseio.com/";
+const ContextProvider = (props) => {
+  const API = "https://first-94ac3-default-rtdb.firebaseio.com/";
 
-    // 
+  //
 
   const [itemState, dispatchState] = useReducer(Reducer, defaultState);
-//  
+  //
   const addItem = async (item) => {
-    console.log(itemState.items ,"thish is our tite,")
+    // console.log(itemState.items, "thish is our tite,");
     // this && is used to prevent position take undefine
-    const data=itemState.items;
-    const isexist =
-          data.findIndex((caartItem) => item.id === caartItem.id);
+    dispatchState({ type: "loading" });
+    const data = itemState.items;
+    const isexist = data.findIndex((caartItem) => item.id === caartItem.id);
     console.log(isexist);
     if (data && isexist !== -1) {
       console.log("Item already exists in the main product data");
+      dispatchState({ type: "loadingdisable" });
+      console.log("dispatchcalled");
       return;
     }
     try {
       const response = await fetch(`${API}Cart.json`, {
-         method: "POST",
+        method: "POST",
         body: JSON.stringify(item),
         headers: {
           "Content-Type": "application/json",
@@ -46,24 +49,48 @@ const defaultState = {
     fetchcartdata();
   };
 
-  const removeItem =useCallback(async(key)=>{
-          //  console.log(id);
-        const response = await  fetch(`${API}Cart/${key}.json`,{
-          method:'DELETE',
-          headers:{ 
-            "Content-Type":"application/json"
-          }
-        })
+  //   add user
+  const adduser = useCallback(
+    async (user) => {
+      try {
+        const response = await fetch(`${API}User.json`, {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-        const data = await response.json();
-        if(response.ok){
-          console.log("success")
-          // throw Error("something is wrong")
-        }
-        fetchcartdata();
-    });
+         const data =await response.json();
+      } catch (errr) {
+        console.log(errr);
+      }
+    },
+    []  );
 
 
+  const removeItem = useCallback(async (key) => {
+    //  console.log(id);
+
+    try {
+      dispatchState({ type: "loading" });
+      const response = await fetch(`${API}Cart/${key}.json`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log("success");
+        // throw Error("something is wrong")
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    fetchcartdata();
+  });
 
   //   here are we making http request  api call
 
@@ -110,10 +137,9 @@ const defaultState = {
 
       const cartarray = [];
       for (let key in data) {
-        
         cartarray.push({
-          id:data[key].id,
-          key:key,
+          id: data[key].id,
+          key: key,
           title: data[key].title,
           ImgURL: data[key].ImgURL,
           price: data[key].price,
@@ -137,11 +163,13 @@ const defaultState = {
     items: itemState.items,
     totalItem: itemState.totalItem,
     addItem: addItem,
+    adduser:adduser,
     removeItem: removeItem,
     fetchdata: fetchdata,
     data: itemState.data,
     loading: itemState.loading,
     error: itemState.error,
+    btn: itemState.btn,
   };
   return (
     <Context.Provider value={contextValue}>{props.children}</Context.Provider>

@@ -3,24 +3,25 @@ const Reducer = (state, action) => {
     case "add":
         return {
           ...state,
+          loading:false,
+          btn:false,
           items: [...action.cartarray],
           totalItem: state.totalItem + 1,
           error: null,  
         };
       
-    case "remove":
-      const updatedItems = state.items.filter((item) => item.id !== action.id);
-      return {
-        ...state,
-        items: updatedItems,
-        totalItem: state.totalItem - 1,
-        error: null,
-      };
     case "loading":
       return {
         ...state,
         loading: true,
+        btn:true
       };
+      case "loadingdisable":
+        return {
+          ...state,
+          loading: false,
+          btn:false
+        };
 
     case "additem":
       return {

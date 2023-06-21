@@ -1,7 +1,5 @@
   import { useCallback } from "react";
-  import Input from "../UI/Input";
-
-
+  import Input from '../../UI/Input'
   const AddProductform = (props) => {
     const submitHandler = useCallback(
       (event) => {

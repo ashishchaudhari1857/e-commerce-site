@@ -32,12 +32,12 @@ const NavBar = () => {
           </li>
           <li className="nav-item">
             <NavLink
-              className="nav-link disabled"
-              href="#"
-              tabIndex="-1"
+            to="/contact"
+              className="nav-link"
+
               aria-disabled="true"
             >
-              Disabled
+              Contact Us 
             </NavLink>
           </li>
           {/* <li classNameName="nav-item">
