@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import Context from "../Store/Context";
+import Context from "../../Store/Context";
 const Itemlist = (props) => {
 const ctx=useContext(Context)
 
@@ -11,10 +11,10 @@ const ctx=useContext(Context)
     <>
        
       <div className="col-12 col-sm-12 col-md-6  " key={props.item.id}>
-        {/* <h5 className="text-center"> {props.item.title} </h5> */}
+        {/* <h5 className="text-center"> {props.item.tile} </h5> */}
         
         <img
-          src={props.item.image}
+          src={props.item.ImgURL}
           className="img-fluid mx-auto d-block "
           alt={props.item.title}
           style={{width:"250px" , height:"280px"}}

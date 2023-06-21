@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useState } from "react"
 import AddProductform from "./AddProductform"
+import { useGlobalHook } from "../Store/Contex_provider";
 const AddProduct =()=>{
+  const ctx=useGlobalHook();
+    const baseAPI="https://first-94ac3-default-rtdb.firebaseio.com/";
     const [data ,setdata]=useState(null);
- const Postdata =useCallback(async(data)=>{
+    const Postdata =useCallback(async(data)=>{
     try{
 
-        const response = await fetch("https://http-request-b5a99-default-rtdb.firebaseio.com/products.json",
+        const response = await fetch(`${baseAPI}products/${data.Category}.json`,
         {
           method:"POST"  ,
           body:JSON.stringify(data),
@@ -17,11 +20,13 @@ const AddProduct =()=>{
             throw new Error("Failed to add product");
           }
     }catch(error){
-        console(error)
-    }          
+        console.log(error)
+    }     
+    
+    ctx.fetchdata();
  } ,[])
 
-/useEffect(() => {
+useEffect(() => {
     if (data) {
         Postdata(data);
       }

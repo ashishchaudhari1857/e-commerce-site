@@ -3,9 +3,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Header/Footer";
 import Items from "./components/Items/Items";
 import Contex_provider from "./components/Store/Contex_provider";
-import Home from "./components/Home/Home";
-import About from "./components/About/About";
-import Error from "./components/Home/Error";
+import About from "./components/Pages/About";
+import Error from "./components/Error/Error";
+import Home from "./components/Pages/Home";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddProduct } from "./components/Addproduct/Addproduct";
@@ -21,9 +21,10 @@ function App() {
           <Route path="/store" element={<Items />} />
           <Route path="/store/:id" element={<ProductDetails />} />
           <Route path="*" element={<Error/>} />
+          <Route path="/addproduct" element={<AddProduct/>} />
         </Route>
       </Routes>
-      <AddProduct></AddProduct>
+      
       <Footer />
       
     </Contex_provider>

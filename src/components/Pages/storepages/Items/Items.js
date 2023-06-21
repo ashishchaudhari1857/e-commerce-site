@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Itemlist from "./Itemlist";
+import Itemlist from "../Pages/storepages/Itemlist";
 import { useGlobalHook } from "../Store/Contex_provider";
 const Items = () => {
     const ctx=useGlobalHook();

@@ -1,21 +1,13 @@
 const Reducer = (state, action) => {
   switch (action.type) {
     case "add":
-      const index = state.items.findIndex((item) => item.id === action.item.id);
-      if (index !== -1) {
-        alert("tem is already available in your list");
         return {
           ...state,
-          error: "Item is already available in your list",
-        };
-      } else {
-        return {
-          ...state,
-          items: [...state.items, action.item],
+          items: [...action.cartarray],
           totalItem: state.totalItem + 1,
-          error: null,
+          error: null,  
         };
-      }
+      
     case "remove":
       const updatedItems = state.items.filter((item) => item.id !== action.id);
       return {
@@ -34,7 +26,7 @@ const Reducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        data: [...state.data, ...action.data],
+        data: [...action.data],
       };
       case "error":
      return  {

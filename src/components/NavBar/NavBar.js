@@ -23,6 +23,14 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink  to="/addproduct"
+              className="nav-link "
+              aria-disabled="true"
+            >
+              Add_Product
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink
               className="nav-link disabled"
               href="#"

@@ -1,4 +1,4 @@
-import NavBar from "../NavBar";
+import NavBar from "../NavBar/NavBar";
 import React from "react";
 import Showcart from "../Cart/Showcart";
 import {Outlet} from 'react-router-dom'
