@@ -13,6 +13,36 @@ const Authform = () => {
 
     if (islogin) {
       //
+      const check = async () => {
+        try {
+          const res = await fetch(
+            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBXXXskQKXF37sbqFTrxdIK7I3juj9VgxI",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                email: email,
+                password: pass,
+                returnSecureToken: true,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          const data = await res.json();
+          console.log(data.idToken);
+
+          if (res.ok) {
+            console.log("done");
+          } else {
+            throw Error(data.error.message);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      check();
     } else {
       const create = async () => {
         try {
