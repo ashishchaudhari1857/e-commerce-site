@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useReducer } from "react";
+import { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import Context from "./Context";
 import Reducer from "./Reducer";
 const defaultState = {
@@ -12,6 +12,8 @@ const defaultState = {
 
 const ContextProvider = (props) => {
   const API = "https://first-94ac3-default-rtdb.firebaseio.com/"; // base api
+  const [token , setToken]=useState(null); // this  check the user  log in or not 
+  const isLogged=!!token;
 
   const [itemState, dispatchState] = useReducer(Reducer, defaultState); // reducer fucntion reducer define into another file
 
@@ -160,12 +162,22 @@ const ContextProvider = (props) => {
   //  const retry = setInterval(()=>{
   //   fetchdata()
   //  },2000)
+const login =(token)=>{
+  setToken(token)
 
+}
+const logout =(token)=>{
+  setToken(null);
+};
   const contextValue = {
     items: itemState.items,
     totalItem: itemState.totalItem,
     addItem: addItem,
     adduser: adduser,
+    login:login,
+    logout:logout,
+    token:token,
+    isLogged:isLogged,
     removeItem: removeItem,
     fetchdata: fetchdata,
     data: itemState.data,

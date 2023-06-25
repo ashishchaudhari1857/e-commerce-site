@@ -32,6 +32,7 @@ function App() {
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/login" element={<Authform />}></Route>
+        <Route path="/logout" element={<Authform />}></Route>
       </Routes>
 
       <Footer />

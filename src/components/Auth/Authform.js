@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Input from "../UI/Input";
+import { useGlobalHook } from "../Store/Contex_provider";
 const Authform = () => {
-  const [islogin, setislogin] = useState(true);
+  const ctx =useGlobalHook();
+  const [islogin, setislogin] = useState(true); // this is for to show the page user have account or not 
   const switchAuthModeHandler = (e) => {
     e.preventDefault();
     setislogin((prevState) => !prevState);
@@ -31,7 +33,7 @@ const Authform = () => {
           );
 
           const data = await res.json();
-          console.log(data.idToken);
+           ctx.login(data.idToken)
 
           if (res.ok) {
             console.log("done");

@@ -5,7 +5,11 @@ const Context =React.createContext(
         totalitem:0,
         addItem: (item) => {},
         removeItem: (id) => {},
-        data:[]
+        data:[],
+        token:'',
+        isLogged:false,
+        login:(token)=>{},
+        logout:()=>{},
     }
 )
 export default Context;
