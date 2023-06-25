@@ -11,27 +11,26 @@ const defaultState = {
 };
 
 const ContextProvider = (props) => {
-  const API = "https://first-94ac3-default-rtdb.firebaseio.com/";
+  const API = "https://first-94ac3-default-rtdb.firebaseio.com/"; // base api
 
-  //
+  const [itemState, dispatchState] = useReducer(Reducer, defaultState); // reducer fucntion reducer define into another file
 
-  const [itemState, dispatchState] = useReducer(Reducer, defaultState);
-  //
+  //  adding itme to cart array
+
   const addItem = async (item) => {
-    // console.log(itemState.items, "thish is our tite,");
-    // this && is used to prevent position take undefine
-    dispatchState({ type: "loading" });
-    const data = itemState.items;
+     
+    dispatchState({ type: "loading" });  // this  is going to make loading true
+
+    const data = itemState.items;  // this was the  old array in which we check if item previous exist or  not
     const isexist = data.findIndex((caartItem) => item.id === caartItem.id);
-    console.log(isexist);
+
     if (data && isexist !== -1) {
       console.log("Item already exists in the main product data");
-      dispatchState({ type: "loadingdisable" });
-      console.log("dispatchcalled");
-      return;
+      dispatchState({ type: "loadingdisable" }); // this make loading   false as we reach to result  for add item if we dont make then loading loop 
+      return;                                    //continuously execute
     }
     try {
-      const response = await fetch(`${API}Cart.json`, {
+        const response = await fetch(`${API}Cart.json`, {
         method: "POST",
         body: JSON.stringify(item),
         headers: {
@@ -44,34 +43,33 @@ const ContextProvider = (props) => {
         throw Error("something is wrong in add itme in cart");
       }
     } catch (err) {
-      console.log(err);
+     dispatchState({type:"error" ,error:err})
     }
     fetchcartdata();
   };
 
   //   add user
-  const adduser = useCallback(
-    async (user) => {
-      try {
-        const response = await fetch(`${API}User.json`, {
-          method: "POST",
-          body: JSON.stringify(user),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  const adduser = useCallback(async (user) => {
+    try {
+      const response = await fetch(`${API}User.json`, {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-         const data =await response.json();
-      } catch (errr) {
-        console.log(errr);
-      }
-    },
-    []  );
+      const data = await response.json();
+    } catch (errr) {
+      console.log(errr);
+    }
+  }, []);
+  
 
+  //   remove item from cart 
 
   const removeItem = useCallback(async (key) => {
-    //  console.log(id);
-
+  
     try {
       dispatchState({ type: "loading" });
       const response = await fetch(`${API}Cart/${key}.json`, {
@@ -82,9 +80,8 @@ const ContextProvider = (props) => {
       });
 
       const data = await response.json();
-      if (response.ok) {
-        console.log("success");
-        // throw Error("something is wrong")
+      if (!response.ok) {
+        throw Error("something is wrong")
       }
     } catch (err) {
       console.log(err);
@@ -92,7 +89,7 @@ const ContextProvider = (props) => {
     fetchcartdata();
   });
 
-  //   here are we making http request  api call
+  //   here are we making http request  api call  to get the data on screen which  stored in product block of firebase
 
   const fetchdata = useCallback(async () => {
     try {
@@ -110,7 +107,7 @@ const ContextProvider = (props) => {
           const item = data[category][key];
           console.log("the key in the fetch", key);
           loaddata.push({
-            id: key,
+            id: key,   // this is for identification in the  to check  item repeated or no in cart
             Category: category,
             Description: item.Description,
             ImgURL: item.ImgURL,
@@ -124,7 +121,9 @@ const ContextProvider = (props) => {
       dispatchState({ type: "error", error: err });
     }
   }, []);
-  //  ew cant  use one callback function inside another
+
+
+  //  we cant  use one callback function inside another
 
   // here  we use the  fetch mehtod to addd the cart
   const fetchcartdata = useCallback(async () => {
@@ -132,14 +131,14 @@ const ContextProvider = (props) => {
       const response = await fetch(`${API}Cart.json`);
       const data = await response.json();
       if (!response.ok) {
-        throw Error("something is wrong");
+        throw Error("error in  fetching cart data ");
       }
 
-      const cartarray = [];
+     const cartarray = [];
       for (let key in data) {
         cartarray.push({
           id: data[key].id,
-          key: key,
+          key: key,   // this is sending in cart object  because with the help of we can track on location and then we  have easy to delete
           title: data[key].title,
           ImgURL: data[key].ImgURL,
           price: data[key].price,
@@ -147,9 +146,12 @@ const ContextProvider = (props) => {
       }
       dispatchState({ type: "add", cartarray: cartarray });
     } catch (err) {
-      console.log(err);
+      dispatchState({ type: "error", error: err });
     }
   }, []);
+
+  //   this called as soon as page reload and any change is happening fetch data and fetchcart data
+
   useEffect(() => {
     fetchdata();
     fetchcartdata();
@@ -163,7 +165,7 @@ const ContextProvider = (props) => {
     items: itemState.items,
     totalItem: itemState.totalItem,
     addItem: addItem,
-    adduser:adduser,
+    adduser: adduser,
     removeItem: removeItem,
     fetchdata: fetchdata,
     data: itemState.data,

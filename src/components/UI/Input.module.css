@@ -1,16 +1,17 @@
 .input {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 1rem;
+    display: block;
     padding-bottom: 1rem;
     border-bottom: 1px solid #ccc;
-    
+    width: 13rem;
+    margin: auto;
   }
   
   .input label {
+    display: flex;
+    width: 100%;
+    justify-content: center;
     font-weight: bold;
-    margin-right: 1rem;
+    margin: auto;
   }
   
   .input input {

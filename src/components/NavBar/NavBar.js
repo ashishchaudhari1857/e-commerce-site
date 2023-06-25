@@ -37,7 +37,17 @@ const NavBar = () => {
 
               aria-disabled="true"
             >
-              Contact Us 
+              Contact Us
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+            to="/login"
+              className="nav-link"
+
+              aria-disabled="true"
+            >
+                Login
             </NavLink>
           </li>
           {/* <li classNameName="nav-item">

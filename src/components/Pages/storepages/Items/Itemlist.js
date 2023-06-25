@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link ,Outlet} from "react-router-dom";
 import Context from "../../../Store/Context";
 const Itemlist = (props) => {
 const ctx=useContext(Context)
@@ -32,6 +32,7 @@ const ctx=useContext(Context)
           </div>
         </div>
       </div>
+      <Outlet/>
     </>
   );
 };

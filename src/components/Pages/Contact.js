@@ -10,13 +10,13 @@ const  Contact =()=>{
       Email:event.target.email.value,
       Mobile_No:event.target.Mobile_Number.value
      }
-    //  ctx.adduser(user);
-    //  event.target.reset()
+     ctx.adduser(user);
+     event.target.reset()
   } 
     return(
         <>
 
-       <h1 className="text-center">ADD USER</h1>
+      
         <form className="form-control" onSubmit={submitHandler}>
         <Input
             label={"Name"}
@@ -51,7 +51,7 @@ const  Contact =()=>{
             
             }}
           ></Input>
-          <button className="bg-secondary" >Add User</button>
+          <button className="bg-secondary mx-auto" >Add User</button>
         </form>
         
         </>
