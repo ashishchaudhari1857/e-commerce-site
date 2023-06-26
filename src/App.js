@@ -13,6 +13,7 @@ import Contact from "./components/Pages/Contact";
 import Comment from "./components/ProductDetails/Comment";
 import { Review } from "./components/ProductDetails/Review";
 import Authform from "./components/Auth/Authform";
+import Profile from "./components/Pages/Profile";
 function App() {
   return (
     <Contex_provider>
@@ -33,6 +34,7 @@ function App() {
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/login" element={<Authform />}></Route>
         <Route path="/logout" element={<Authform />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
 
       <Footer />

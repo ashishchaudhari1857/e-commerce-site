@@ -62,6 +62,13 @@ const NavBar = () => {
             </NavLink>
           </li>
         )}
+        {isLogged && (
+          <li className="nav-item">
+            <NavLink to="/profile" className="nav-link"   >
+              profile
+            </NavLink>
+          </li>
+        )}
         {/* <li classNameName="nav-item">
             <button classNameName="btn btn-primary">Cart</button>
           </li> */}

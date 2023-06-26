@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Input from "../UI/Input";
 import { useGlobalHook } from "../Store/Contex_provider";
+import { useNavigate } from "react-router-dom";
+
 const Authform = () => {
+  const navigate=useNavigate();
   const ctx =useGlobalHook();
   const [islogin, setislogin] = useState(true); // this is for to show the page user have account or not 
   const switchAuthModeHandler = (e) => {
@@ -43,6 +46,7 @@ const Authform = () => {
         } catch (error) {
           console.log(error);
         }
+        navigate('/profile')
       };
       check();
     } else {
