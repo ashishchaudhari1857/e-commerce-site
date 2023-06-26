@@ -11,13 +11,13 @@ const NavBar = () => {
   return (
     <>
       <ul className="nav   justify-content-center navbar navbar-expand-sm">
-        {isLogged && (
+       
           <li className="nav-item">
             <NavLink className="nav-link active" aria-current="page" to="/home">
               HOME
             </NavLink>
           </li>
-        )}
+        
 
         <li className="nav-item">
           <NavLink className="nav-link" to="/store">

@@ -12,7 +12,8 @@ const defaultState = {
 
 const ContextProvider = (props) => {
   const API = "https://first-94ac3-default-rtdb.firebaseio.com/"; // base api
-  const [token , setToken]=useState(null); // this  check the user  log in or not 
+const   initialToken =localStorage.getItem('token')
+  const [token , setToken]=useState(initialToken); // this  check the user  log in or not 
   const isLogged=!!token;
 
   const [itemState, dispatchState] = useReducer(Reducer, defaultState); // reducer fucntion reducer define into another file
@@ -164,10 +165,12 @@ const ContextProvider = (props) => {
   //  },2000)
 const login =(token)=>{
   setToken(token)
+  localStorage.setItem('token' ,token)
 
 }
 const logout =(token)=>{
   setToken(null);
+  localStorage.removeItem('token')
 };
   const contextValue = {
     items: itemState.items,

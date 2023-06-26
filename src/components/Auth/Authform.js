@@ -4,9 +4,9 @@ import { useGlobalHook } from "../Store/Contex_provider";
 import { useNavigate } from "react-router-dom";
 
 const Authform = () => {
-  const navigate=useNavigate();
-  const ctx =useGlobalHook();
-  const [islogin, setislogin] = useState(true); // this is for to show the page user have account or not 
+  const navigate = useNavigate();
+  const ctx = useGlobalHook();
+  const [islogin, setislogin] = useState(true); // this is for to show the page user have account or not
   const switchAuthModeHandler = (e) => {
     e.preventDefault();
     setislogin((prevState) => !prevState);
@@ -36,17 +36,17 @@ const Authform = () => {
           );
 
           const data = await res.json();
-           ctx.login(data.idToken)
+          ctx.login(data.idToken);
 
           if (res.ok) {
             console.log("done");
+            navigate("/home");
           } else {
             throw Error(data.error.message);
           }
         } catch (error) {
           console.log(error);
         }
-        navigate('/profile')
       };
       check();
     } else {
@@ -118,7 +118,8 @@ const Authform = () => {
                   {islogin ? "login " : "Create Account"}
                 </button>
                 <button
-                  className=" border-0 my-1"
+                  className=" border-0 my-1 "
+                  style={{backgroundColor:"transparent"}}
                   onClick={switchAuthModeHandler}
                 >
                   {islogin ? "create new account " : "login with same account"}
