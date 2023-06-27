@@ -1,79 +1,106 @@
 import { useGlobalHook } from "../Store/Contex_provider";
 import { NavLink } from "react-router-dom";
+
 const NavBar = () => {
   const ctx = useGlobalHook();
   const isLogged = ctx.isLogged;
 
   const handleLogout = () => {
-    console.log("this va,k")
     ctx.logout();
   };
+
   return (
-    <>
-      <ul className="nav   justify-content-center navbar navbar-expand-sm">
-       
-          <li className="nav-item">
-            <NavLink className="nav-link active" aria-current="page" to="/home">
-              HOME
-            </NavLink>
-          </li>
-        
-
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/store">
-            STORE
-          </NavLink>
-        </li>
-
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/about">
-            ABOUT
-          </NavLink>
-        </li>
-        {isLogged && (
-          <li className="nav-item">
-            <NavLink
-              to="/addproduct"
-              className="nav-link "
-              aria-disabled="true"
-            >
-              Add_Product
-            </NavLink>
-          </li>
-        )}
-        {isLogged && (
-          <li className="nav-item">
-            <NavLink to="/contact" className="nav-link" aria-disabled="true">
-              Contact Us
-            </NavLink>
-          </li>
-        )}
-        {!isLogged && (
-          <li className="nav-item">
-            <NavLink to="/login" className="nav-link" aria-disabled="true">
-              Login
-            </NavLink>
-          </li>
-        )}
-        {isLogged && (
-          <li className="nav-item">
-            <NavLink to="/logout" className="nav-link"   onClick={handleLogout}>
-              Logout
-            </NavLink>
-          </li>
-        )}
-        {isLogged && (
-          <li className="nav-item">
-            <NavLink to="/profile" className="nav-link"   >
-              profile
-            </NavLink>
-          </li>
-        )}
-        {/* <li classNameName="nav-item">
-            <button classNameName="btn btn-primary">Cart</button>
-          </li> */}
-      </ul>
-    </>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <NavLink className="navbar-brand" to="/home">
+          ShopMart
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/home">
+                HOME
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/store">
+                STORE
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/about">
+                ABOUT
+              </NavLink>
+            </li>
+            {isLogged && (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/addproduct"
+                >
+                  Add_Product
+                </NavLink>
+              </li>
+            )}
+            {isLogged && (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/contact"
+                >
+                  Contact Us
+                </NavLink>
+              </li>
+            )}
+            {!isLogged && (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              </li>
+            )}
+            {isLogged && (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/logout"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            )}
+            {isLogged && (
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/profile">
+                  Profile
+                </NavLink>
+              </li>
+            )}
+           
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
+
 export default NavBar;

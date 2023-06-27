@@ -8,7 +8,6 @@ const Showcart =()=>{
  }
  const closehandler =()=>{
     setflag(false);
-
  }
 
  return (

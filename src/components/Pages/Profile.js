@@ -1,8 +1,13 @@
 import React from "react";
 import Input from "../UI/Input";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useGlobalHook } from "../Store/Contex_provider";
+import { useNavigate } from "react-router-dom";
+
 const Profile = () => {
   const ctx = useGlobalHook();
+  const Navigate=useNavigate();
   const token = ctx.token;
   const submithandler = async (e) => {
     e.preventDefault();
@@ -25,10 +30,14 @@ const Profile = () => {
       const data = res.json();
       if (res.ok) {
         console.log("password change successfully");
+        toast.success("password change successfully")
+        // Navigate('/home')
       } else {
         throw Error(data.error.message);
       }
-    } catch (err) {}
+    } catch (err) {
+      toast.error(err.message)
+    }
   };
   return (
     <>
@@ -50,6 +59,7 @@ const Profile = () => {
           <button type="submit"> submit</button>
         </div>
       </form>
+      <ToastContainer></ToastContainer>
     </>
   );
 };

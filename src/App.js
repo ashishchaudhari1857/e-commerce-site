@@ -15,13 +15,14 @@ import Authform from "./components/Auth/Authform";
 import Profile from "./components/Pages/Profile";
 import { useContext } from "react";
 import Context from "./components/Store/Context";
-import { Outlet } from "react-router-dom";
 function App() {
   const ctx = useContext(Context);
   const isLogged = ctx.isLogged;
 
   return (
     <>
+
+    <div>
       <Header />
 
       <Routes>
@@ -48,6 +49,8 @@ function App() {
         )}
       </Routes>
       <Footer />
+      </div>
+    
     </>
   );
 }

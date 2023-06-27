@@ -2,7 +2,7 @@ const About = () => {
   return (
     <div className="container">
       <h3
-        className="d-flex justify-content-center my-2 mb-3 bg-info"
+        className="d-flex justify-content-center my-2 mb-3 bg-secondary"
         style={{ fontFamily: "fantasy" }}
       >
         ABOUT US

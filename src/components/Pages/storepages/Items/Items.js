@@ -1,16 +1,16 @@
 import { useState } from "react";
 import Itemlist from "./Itemlist";
 import { useGlobalHook } from "../../../Store/Contex_provider";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Items = () => {
-    const ctx=useGlobalHook();
+const ctx=useGlobalHook();
 
-  
  console.log(ctx.data)
- console.log(ctx.error)
  
  
   const loading =ctx.loading;
-  const error=ctx.error;
+  
   //  const [items, setitems]=useState(productsArr);
   const itemlist =ctx.data.map((item )=>{
     return(<>
@@ -20,18 +20,15 @@ const Items = () => {
   })
   console.log(itemlist)
   return(
-  
+  <>
   <div className="container " >
  
     <div className="row" >
-
-      {!loading &&  itemlist.length >0 && itemlist} 
-      {!loading && itemlist.length===0 &&<p>No Data found</p>}
-      {error    && <p>something is wromg </p>}
-      {loading &&  !error &&<p>Loading.......</p> } 
-   
+      {itemlist}
     </div>
-    </div>
+    </div>'
+    <ToastContainer/>
+    </>
   );
 };
 

@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Input from "../UI/Input";
 import { useGlobalHook } from "../Store/Contex_provider";
 import { useNavigate } from "react-router-dom";
-
 const Authform = () => {
   const navigate = useNavigate();
   const ctx = useGlobalHook();
@@ -11,6 +12,8 @@ const Authform = () => {
     e.preventDefault();
     setislogin((prevState) => !prevState);
   };
+  
+
   const submitHandler = (e) => {
     e.preventDefault();
     var email = e.target.Email.value;
@@ -40,12 +43,15 @@ const Authform = () => {
 
           if (res.ok) {
             console.log("done");
+            toast.success("Login successful!");
             navigate("/home");
+
           } else {
             throw Error(data.error.message);
           }
         } catch (error) {
           console.log(error);
+          toast.error(error.message);
         }
       };
       check();
@@ -72,11 +78,13 @@ const Authform = () => {
 
           if (res.ok) {
             console.log("done");
+            toast.success("Create account successful!");
           } else {
             throw Error(data.error.message);
           }
         } catch (error) {
           console.log(error);
+          toast.error(error.message);
         }
       };
       create();
@@ -119,7 +127,7 @@ const Authform = () => {
                 </button>
                 <button
                   className=" border-0 my-1 "
-                  style={{backgroundColor:"transparent"}}
+                  style={{ backgroundColor: "transparent" }}
                   onClick={switchAuthModeHandler}
                 >
                   {islogin ? "create new account " : "login with same account"}
@@ -129,6 +137,7 @@ const Authform = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
