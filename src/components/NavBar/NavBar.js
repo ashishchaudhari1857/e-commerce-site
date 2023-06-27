@@ -1,14 +1,18 @@
 import { useGlobalHook } from "../Store/Contex_provider";
 import { NavLink } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+//  here with the help of islogged  weather the navbar show or not
 const NavBar = () => {
   const ctx = useGlobalHook();
+  
   const isLogged = ctx.isLogged;
 
   const handleLogout = () => {
     ctx.logout();
+   
   };
-
+ 
+ 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -34,7 +38,7 @@ const NavBar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to="/store">
+              <NavLink className="nav-link" activeClassName="active" to={ isLogged ?"/store":"/login"} >
                 STORE
               </NavLink>
             </li>
@@ -81,7 +85,7 @@ const NavBar = () => {
                 <NavLink
                   className="nav-link"
                   activeClassName="active"
-                  to="/logout"
+                  to="/login"
                   onClick={handleLogout}
                 >
                   Logout

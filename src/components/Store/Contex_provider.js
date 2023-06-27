@@ -19,16 +19,20 @@ const defaultState = {
 const ContextProvider = (props) => {
   const API = "https://first-94ac3-default-rtdb.firebaseio.com/"; // base api
   const initialToken = localStorage.getItem("token");
+  const initialId = localStorage.getItem("ID");
+
   const [token, setToken] = useState(initialToken); // this  check the user  log in or not
+  const [userid, setuserid] = useState(initialId);
+  console.log("useremail", userid);
   const isLogged = !!token;
   // auto logout
 
-  useEffect(() => {
-    const id = setTimeout(() => {
-      setToken(null);
-    }, 10000);
-    return () => clearTimeout(id);
-  }, []);
+  // useEffect(() => {
+  //   const id = setTimeout(() => {
+  //     setToken(null);
+  //   }, 50000);
+  //   return () => clearTimeout(id);
+  // }, []);
 
   const [itemState, dispatchState] = useReducer(Reducer, defaultState); // reducer fucntion reducer define into another file
 
@@ -46,7 +50,16 @@ const ContextProvider = (props) => {
       return;
     }
     try {
-      const response = await fetch(`${API}Cart.json`, {
+      //  here we can do  `${API} Cart/${userid} for better management in database
+      // but  during the fetching we need have  use to two loop because the structure become
+      //like  cart
+      //             userid- then data for this
+      //             userid-
+
+      // like we don  in main product (fetchproduct)
+      // .another way to make it user specific that by getting mail id by  using userid
+      //
+      const response = await fetch(`${API}${userid}.json`, {
         method: "POST",
         body: JSON.stringify(item),
         headers: {
@@ -54,14 +67,14 @@ const ContextProvider = (props) => {
         },
       });
       const data = await response.json();
-      if(response.ok){
+      if (response.ok) {
         toast.dismiss(loading);
-        toast.success("item added successfully")
-      }else{
-        throw   Error(data.error.message)
+        toast.success("item added successfully");
+      } else {
+        throw Error(data.error.message);
       }
     } catch (err) {
-        toast.error(err.message)
+      toast.error(err.message);
     }
     fetchcartdata();
   };
@@ -69,7 +82,7 @@ const ContextProvider = (props) => {
   //   add user
   const adduser = useCallback(async (user) => {
     const loading = toast.info("loading........");
-    
+
     try {
       const response = await fetch(`${API}User.json`, {
         method: "POST",
@@ -81,24 +94,23 @@ const ContextProvider = (props) => {
 
       const data = await response.json();
       if (response.ok) {
-        toast.success("user added successfuly")
-        toast.dismiss(loading)
-      }else{
-         throw Error(data.error.message)
+        toast.success("user added successfuly");
+        toast.dismiss(loading);
+      } else {
+        throw Error(data.error.message);
       }
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   }, []);
 
   //   remove item from cart
 
   const removeItem = useCallback(async (key) => {
-
     try {
-    const loading = toast.info("loading........");
+      const loading = toast.info("loading........");
 
-      const response = await fetch(`${API}Cart/${key}.json`, {
+      const response = await fetch(`${API}${userid}/${key}.json`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -106,17 +118,15 @@ const ContextProvider = (props) => {
       });
 
       const data = await response.json();
-      if (response.ok)
-      {
-        toast.success("item deleted successfuly")
-        toast.dismiss(loading)
-        dispatchState({type:"removecart"})
-      } 
-      else{
+      if (response.ok) {
+        toast.success("item deleted successfuly");
+        toast.dismiss(loading);
+        dispatchState({ type: "removecart" });
+      } else {
         throw Error(data.error.message);
       }
     } catch (err) {
-     toast.error(err.message)
+      toast.error(err.message);
     }
     fetchcartdata();
   });
@@ -130,12 +140,10 @@ const ContextProvider = (props) => {
       const response = await fetch(`${API}products.json`);
       const data = await response.json();
       console.log("Data fetched:", data);
-      if (response.ok)
-      {
-        toast.success("data fetch successfuly")
-        toast.dismiss(loading)
-      } 
-      else{
+      if (response.ok) {
+        toast.success("data fetch successfuly");
+        toast.dismiss(loading);
+      } else {
         throw Error(data.error.message);
       }
       const loaddata = [];
@@ -156,7 +164,7 @@ const ContextProvider = (props) => {
       }
       dispatchState({ type: "additem", data: loaddata });
     } catch (err) {
-      toast.error(err.m)
+      toast.error(err.m);
     }
   }, []);
 
@@ -167,17 +175,15 @@ const ContextProvider = (props) => {
     const loading = toast.info("loading........");
 
     try {
-      const response = await fetch(`${API}Cart.json`);
+      const response = await fetch(`${API}${userid}.json`);
       const data = await response.json();
-      if (response.ok)
-      {
-        toast.success("data fetch successfuly")
-        toast.dismiss(loading)
-      } 
-      else{
+      if (response.ok) {
+        toast.success("data fetch successfuly");
+        toast.dismiss(loading);
+      } else {
         throw Error(data.error.message);
       }
-
+  console.log(data)
       const cartarray = [];
       for (let key in data) {
         cartarray.push({
@@ -188,32 +194,38 @@ const ContextProvider = (props) => {
           price: data[key].price,
         });
       }
+      console.log("this", cartarray);
       dispatchState({ type: "add", cartarray: cartarray });
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
-
-  }, []);
+  }, [userid]);
+  useEffect(() => {
+    fetchcartdata();
+  }, [fetchcartdata, token, userid]);
 
   //   this called as soon as page reload and any change is happening fetch data and fetchcart data
 
   useEffect(() => {
     fetchdata();
-    fetchcartdata();
-  }, [fetchdata, fetchcartdata]);
+  }, [fetchdata]);
 
   //  const retry = setInterval(()=>{
   //   fetchdata()
   //  },2000)
-  const login = (token) => {
+  const login = (token, userid) => {
     setToken(token);
+    setuserid(userid);
     localStorage.setItem("token", token);
+    localStorage.setItem("ID", userid);
   };
   const logout = (token) => {
     setToken(null);
+    setuserid(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("ID");
   };
-  
+
   const contextValue = {
     items: itemState.items,
     totalItem: itemState.totalItem,

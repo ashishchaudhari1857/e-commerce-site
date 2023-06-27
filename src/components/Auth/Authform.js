@@ -39,10 +39,13 @@ const Authform = () => {
           );
 
           const data = await res.json();
-          ctx.login(data.idToken);
+            console.log("uset",data)
+            var mail = data.email.replace("@", "");
+               mail=data.email.replace(".", "")
+            ctx.login(data.idToken ,mail)
 
           if (res.ok) {
-            console.log("done");
+            
             toast.success("Login successful!");
             navigate("/home");
 
