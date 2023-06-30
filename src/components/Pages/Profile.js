@@ -29,9 +29,9 @@ const Profile = () => {
       );
       const data = res.json();
       if (res.ok) {
-        console.log("password change successfully");
+       
         toast.success("password change successfully")
-        // Navigate('/home')
+        Navigate('/home')
       } else {
         throw Error(data.error.message);
       }

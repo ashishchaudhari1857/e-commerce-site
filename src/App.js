@@ -31,9 +31,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/store/:id" element={<ProductDetails />}>
+          <Route path="/store/:id/:category" element={<ProductDetails />}>
             <Route path="comment" element={<Comment />} />
-            <Route path="review" element={<Review />} />
+            <Route path="review/:ProductID" element={<Review />} />
           </Route>
 
           <Route path="/login" element={<Authform />} />

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react"
 import AddProductform from "./AddProductform"
 import { useGlobalHook } from "../../Store/Contex_provider";
 const AddProduct =()=>{
+
+  //  this page is used to add new product on the basic of category
   const ctx=useGlobalHook();
     const baseAPI="https://first-94ac3-default-rtdb.firebaseio.com/";
     const [data ,setdata]=useState(null);

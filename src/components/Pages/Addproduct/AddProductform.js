@@ -71,9 +71,11 @@
               step: "1",
             }}
           ></Input>
+          <div className=" d-flex justify-content-center align-items-center my-1">
           <button type="submit" className="btn btn-info">
             Add Product
           </button>
+          </div>
         </form>
       </>
     );

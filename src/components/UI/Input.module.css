@@ -4,6 +4,7 @@
     border-bottom: 1px solid #ccc;
     width: 13rem;
     margin: auto;
+     
   }
   
   .input label {
@@ -12,6 +13,7 @@
     justify-content: center;
     font-weight: bold;
     margin: auto;
+    
   }
   
   .input input {

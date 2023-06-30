@@ -13,7 +13,7 @@ const Authform = () => {
     setislogin((prevState) => !prevState);
   };
   
-
+// in this  basic login logic hai
   const submitHandler = (e) => {
     e.preventDefault();
     var email = e.target.Email.value;
@@ -39,10 +39,12 @@ const Authform = () => {
           );
 
           const data = await res.json();
-            console.log("uset",data)
-            var mail = data.email.replace("@", "");
-               mail=data.email.replace(".", "")
+            console.log("user",data)
+            console.log("this is email",data.email)
+              //  var mail = data.email.replace("@", "");
+              var  mail=data.email.replace(".", "")
             ctx.login(data.idToken ,mail)
+            
 
           if (res.ok) {
             

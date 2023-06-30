@@ -6,10 +6,11 @@ const Itemlist = (props) => {
   const ctx = useContext(Context);
 
   const add = (item) => {
-    ctx.addItem(item);
+    ctx.addItem({...item ,quantity:1});
   };
 
   const btn = ctx.btn;
+  console.log("btn",btn)
 
   return (
     <>
@@ -22,7 +23,7 @@ const Itemlist = (props) => {
             style={{ width: "200px", height: "28vh" }}
           />
           <h5 className="text-center mt-3">
-            <Link to={`/store/${props.item.id}`}>{props.item.title}</Link>
+            <Link to={`/store/${props.item.id}/${props.item.Category}`}>{props.item.title}</Link>
           </h5>
         </div>
 

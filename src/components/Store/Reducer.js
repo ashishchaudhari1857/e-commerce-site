@@ -3,10 +3,23 @@ const Reducer = (state, action) => {
     case "add":
         return {
           ...state,
-          btn:false,
           items: [...action.cartarray],
-          totalItem: state.totalItem + 1,
+            totalAmount: action.cartarray.reduce(
+            (total, item) => total + item.quantity * item.price,0),
+            totalItem: action.cartarray.reduce((total, item) => total + item.quantity, 0),
         };
+
+        case "enableBtn":
+          return{
+            ...state,
+            btn:false,
+          }
+          case "disableBtn":
+            return{
+              ...state,
+              btn:true
+          }
+
       
       case "removecart":
         return{
@@ -16,7 +29,9 @@ const Reducer = (state, action) => {
       
     case "additem":
       return {
+
         ...state,
+        btn:false,
         data: [...action.data],
       };
       case "error":

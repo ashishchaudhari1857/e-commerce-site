@@ -1,4 +1,6 @@
+import { useGlobalHook } from "../Store/Contex_provider";
 const Modal = (props) => {
+  const ctx=useGlobalHook();
     console.log(props.children)
   return (
     <>
@@ -19,9 +21,13 @@ const Modal = (props) => {
             </div>
             <div className="modal-body">
              {props.children}
-            
+             <div className="d-block">
+              <h3>TotalAmount</h3>  
+             <h5>  {ctx.totalAmount} $</h5>
+              </div>
             </div>
             <div className="modal-footer">
+             
               <button
                  onClick={props.onclose}
                 type="button"
@@ -32,7 +38,7 @@ const Modal = (props) => {
               </button>
               <button type="button" className="btn btn-primary fs-0 p-1 p-sm-0 p-md-1">
 
-                Save changes
+               Buy Now
               </button>
             </div>
           </div>
