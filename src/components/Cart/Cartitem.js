@@ -6,7 +6,7 @@ const ctx = useContext(Context);
      
     const remove = useCallback((item) => {
     ctx.removeItem(item);
-  }, [ctx  ,props.item.key]);
+  }, [ctx]);
 
   // 
   const IncreaseQuantity =(item)=>{
