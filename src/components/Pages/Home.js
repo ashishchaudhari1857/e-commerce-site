@@ -5,7 +5,8 @@ const Home = () => {
         <img
           src="/shop.jpg"
           className="img-fluid"
-          style={{ height: "430px", width: "100%", objectFit: "cover" }}
+          alt="loading"
+          style={{ height: "530px", width: "100%", objectFit: "cover" }}
         />
         <div
           style={{
@@ -15,7 +16,7 @@ const Home = () => {
             transform: "translate(-50%, -50%)",
             textAlign: "center",
             color: "white",
-          fontFamily:"cursive",
+          fontFamily:"monospace",
           fontWeight:"bold"
           }}
         >

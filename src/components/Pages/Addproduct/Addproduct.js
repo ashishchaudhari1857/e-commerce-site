@@ -42,4 +42,4 @@ return(
 )
 }
 
-export { AddProduct};
+export default AddProduct;

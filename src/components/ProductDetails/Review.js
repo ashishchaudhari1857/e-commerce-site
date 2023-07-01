@@ -55,7 +55,7 @@ const Review = () => {
       const res = await fetch(`${API}Review/${ProductID}.json`);
       const data = await res.json();
       if (res.ok) {
-        toast.success("review fetch successfully");
+        // toast.success("review fetch successfully");
       } else {
         throw Error(data.error.message);
       }
@@ -73,7 +73,7 @@ const Review = () => {
     } catch (err) {
       toast.error(err.message);
     }
-  }, []);
+  }, [ProductID]);
 
   console.log("this could be us but ", getReviews);
   useEffect(() => {
@@ -144,4 +144,4 @@ const Review = () => {
   );
 };
 
-export { Review };
+export  default  Review ;

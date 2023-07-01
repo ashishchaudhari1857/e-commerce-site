@@ -12,6 +12,7 @@ const About = () => {
           <img
             src="/img.jpeg   "
             className="rounded border border-dark img-fluid float-start mx-3 p-1 bg-dark "
+            alt="loading"
             width="200px"
             height="120px"
           ></img>

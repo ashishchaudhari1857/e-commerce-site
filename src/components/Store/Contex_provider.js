@@ -171,7 +171,7 @@ console.log(isexist)
 
       const data = await response.json();
       if (response.ok) {
-        toast.info("your query successfuly  we  will   try connect as possible as");
+        toast.info("your query successfully send we  will   try connect as possible as");
         toast.dismiss(loading);
       } else {
         throw Error(data.error.message);
@@ -245,7 +245,7 @@ console.log(isexist)
       const data = await response.json();
       console.log("Data fetched:", data);
       if (response.ok) {
-        toast.success("data fetch successfuly");
+        // toast.success("data fetch successfuly");
         toast.dismiss(loading);
       } else {
         throw Error(data.error.message);
@@ -284,7 +284,7 @@ console.log(isexist)
       const response = await fetch(`${API}${userid}.json`);
       const data = await response.json();
       if (response.ok) {
-        toast.success("data fetch successfuly");
+        // toast.success("data fetch successfuly");
         toast.dismiss(loading);
       } else {
         throw Error(data.error.message);
